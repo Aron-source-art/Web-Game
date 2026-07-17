@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web 1 · Zona de entretenimiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --bg-panel: #16162b;
+    --bg-panel-2: #1e1e38;
+    --cyan: #00f5ff;
+    --pink: #ff2d95;
+    --yellow: #ffcc00;
+    --text: #eef0ff;
+    --text-muted: #9090b8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Efecto CRT: lineas sutiles tipo pantalla vieja */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 2;
+  }
+
+  /* Resplandor ambiente de fondo */
+  body::after {
+    content: "";
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(0,245,255,0.08) 0%, transparent 65%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--pink);
+    margin-bottom: 22px;
+    z-index: 1;
+  }
+
+  h1.titulo {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(20px, 4.5vw, 34px);
+    line-height: 1.7;
+    text-align: center;
+    max-width: 780px;
+    margin: 0 0 18px;
+    color: var(--yellow);
+    text-shadow:
+      0 0 6px rgba(255,204,0,0.6),
+      0 0 22px rgba(255,204,0,0.25);
+    z-index: 1;
+    animation: flicker 3.5s ease-in-out 1;
+  }
+
+  @keyframes flicker {
+    0%   { opacity: 0; }
+    12%  { opacity: 1; }
+    18%  { opacity: 0.4; }
+    24%  { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    h1.titulo { animation: none; }
+  }
+
+  p.subtitulo {
+    max-width: 560px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 50px;
+    z-index: 1;
+  }
+
+  .cabinet {
+    z-index: 1;
+    width: min(560px, 92vw);
+    background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+    border: 2px solid rgba(0,245,255,0.35);
+    border-radius: 18px;
+    padding: 36px 32px;
+    text-align: center;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+  }
+
+  .marquee {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 22px;
+    color: var(--cyan);
+    text-shadow: 0 0 10px rgba(0,245,255,0.55);
+    margin: 0 0 18px;
+    letter-spacing: 2px;
+  }
+
+  .cabinet p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 0 0 28px;
+  }
+
+  .btn-jugar {
+    display: inline-block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #0d0d1a;
+    background: var(--yellow);
+    padding: 16px 26px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 0 18px rgba(255,204,0,0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn-jugar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 26px rgba(255,204,0,0.65);
+  }
+
+  footer {
+    margin-top: 60px;
+    color: #55557a;
+    font-size: 12px;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+  <div class="eyebrow">◆ BIENVENIDO ◆</div>
+
+  <h1 class="titulo">TU RINCÓN PARA<br>PASAR EL RATO</h1>
+
+  <p class="subtitulo">
+    Una web pensada para entretenerse: juegos de mesa, cartas y videojuegos,
+    todo en un mismo lugar.
+  </p>
+
+  <div class="cabinet">
+    <div class="marquee">JUEGOS</div>
+    <p>
+      Encontrá varios juegos para pasar el rato: desde clickers adictivos
+      hasta batallas por defender tu base.
+    </p>
+    <a class="btn-jugar" href="Juegos/Index-Juegos.html">▶ IR AL MENÚ</a>
+  </div>
+
+  <footer>hecho a mano, nivel por nivel</footer>
+
+</body>
+</html>
