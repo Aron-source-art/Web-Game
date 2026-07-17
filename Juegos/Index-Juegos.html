@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Menú de selección de juegos: Click Aventura y Defensor Fusión. Elige tu juego favorito.">
+<meta name="theme-color" content="#0d0d1a">
+<meta property="og:title" content="Sala de Juegos · Web-Game">
+<meta property="og:description" content="Elige entre Click Aventura o Defensor Fusión. Dos juegos adictivos listos para jugar.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --bg-panel: #16162b;
+    --bg-panel-2: #1e1e38;
+    --cyan: #00f5ff;
+    --pink: #ff2d95;
+    --yellow: #ffcc00;
+    --text: #eef0ff;
+    --text-muted: #9090b8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 60px 20px 40px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 2;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    top: -25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(255,45,149,0.08) 0%, transparent 65%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+  }
+
+  .eyebrow {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(20px, 4vw, 30px);
+    color: var(--pink);
+    text-shadow: 0 0 10px rgba(255,45,149,0.5), 0 0 26px rgba(255,45,149,0.2);
+    margin: 0 0 18px;
+    line-height: 1.6;
+  }
+
+  header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .cartucho {
+    background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+    border: 2px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .cartucho:nth-child(1) { border-color: rgba(0,245,255,0.3); }
+  .cartucho:nth-child(2) { border-color: rgba(255,45,149,0.3); }
+
+  .cartucho:hover {
+    transform: translateY(-4px);
+  }
+  .cartucho:nth-child(1):hover {
+    box-shadow: 0 0 24px rgba(0,245,255,0.25);
+    border-color: var(--cyan);
+  }
+  .cartucho:nth-child(2):hover {
+    box-shadow: 0 0 24px rgba(255,45,149,0.25);
+    border-color: var(--pink);
+  }
+
+  .num {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  .cartucho h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cartucho:nth-child(1) h2 { color: var(--cyan); }
+  .cartucho:nth-child(2) h2 { color: var(--pink); }
+
+  .cartucho p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .jugar {
+    align-self: flex-start;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    text-decoration: none;
+    color: #0d0d1a;
+    background: var(--yellow);
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 0 14px rgba(255,204,0,0.35);
+    transition: transform 0.15s ease;
+  }
+  .jugar:hover { transform: translateY(-2px); }
+
+  .volver {
+    display: block;
+    text-align: center;
+    margin: 50px auto 0;
+    color: var(--text-muted);
+    font-size: 13px;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+  }
+  .volver:hover { color: var(--text); }
+</style>
+<title>Sala de Juegos</title>
+</head>
+<body>
+
+  <header>
+    <div class="eyebrow">◆ SALA DE JUEGOS ◆</div>
+    <h1>ELEGÍ TU JUEGO</h1>
+    <p>Dos juegos, dos estilos distintos. Metele play al que más te llame.</p>
+  </header>
+
+  <div class="grid">
+
+    <div class="cartucho">
+      <span class="num">JUEGO 01</span>
+      <h2>CLICK AVENTURA</h2>
+      <p>Un clicker con niveles, autoclickers, gemas y renacimientos. Hacé click, subí de nivel y no pares.</p>
+      <a class="jugar" href="Clicker3_0.html">▶ JUGAR</a>
+    </div>
+
+    <div class="cartucho">
+      <span class="num">JUEGO 02</span>
+      <h2>DEFENSOR FUSIÓN</h2>
+      <p>Fusioná tus cartas para crear torres más fuertes y defendé tu base de oleadas de enemigos.</p>
+      <a class="jugar" href="Defiende la base.html">▶ JUGAR</a>
+    </div>
+
+  </div>
+
+  <a class="volver" href="../index.html">← volver al inicio</a>
+
+</body>
+</html>
